@@ -28,3 +28,5 @@ https://hub.docker.com/r/sergioapv/ads_project
 App Architecture:
 
 https://app.creately.com/diagram/8Q7cT8P4xaA/view
+
+For docker build through code, check the fork on https://github.com/sergioapv/ADS
