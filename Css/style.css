@@ -5,7 +5,7 @@ body{
 }
 
 /* The Modal (background) */
-.modal ,  .modal_range_list{
+.modal ,  .modal_range_list , .diference_modal{
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
@@ -19,7 +19,7 @@ body{
 }
 
 /* Modal Content */
-.modal-content , .modal-content_range_list{
+.modal-content , .modal-content_range_list , .diference_modal_content{
   margin: auto;
   margin-top: 5%;
   padding: 20px;
@@ -40,7 +40,7 @@ body{
   margin-left: 8px;
 }
 
-.modal_range_list span{
+.modal_range_list span , .diference_modal span{
   font-family: 'Segoe UI';
   font-size: 18px;
 }
@@ -261,7 +261,7 @@ body{
   font-size: 20px;
 }
 
-.submit_changes_button , .range_change_button{
+.submit_changes_button , .range_change_button, .diference_button{
   position: absolute;
   right: 20px;
   bottom: 10px;
@@ -270,6 +270,13 @@ body{
   padding: 5px 15px;
   border-radius: 7px;
   cursor: pointer;
+}
+
+.diference_button{
+  position: relative;
+  font-family: 'Segoe UI';
+  margin: 0 100px;
+  text-align: center;
 }
 
 .dim4graph{

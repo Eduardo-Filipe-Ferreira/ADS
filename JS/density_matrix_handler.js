@@ -49,6 +49,7 @@ function create_matrix_density(div, dims , chosen_algs){
     chosen_algs.forEach((algorithm) => {
       let graphmatrix = document.createElement('div')
       graphmatrix.classList.add('graphmatrix');
+      graphmatrix.id = algorithm;
       console.log(graphmatrix);
 
       density_matrix.appendChild(graphmatrix);
@@ -58,11 +59,89 @@ function create_matrix_density(div, dims , chosen_algs){
     });
 
     graphs_content.appendChild(density_matrix);
+    create_diference_modal(density_matrix);
   }
   else {
     twoDimDensityPlot(div, dims, chosen_algs)
   }
 
+}
+function create_diference_modal(div){
+  let graphs_content = div.parentNode;
+
+  let diference_button = document.createElement('span');
+  diference_button.classList.add('diference_button');
+  diference_button.innerHTML = 'View diference between algorithms';
+
+
+  graphs_content.appendChild(diference_button);
+
+  diference_button.addEventListener('click' , e => {
+
+    var diference_modal = document.createElement('div');
+    diference_modal.classList.add('diference_modal');
+    diference_modal.style = 'display:none;';
+
+    var diference_modal_content = document.createElement('div');
+    diference_modal_content.classList.add('diference_modal_content');
+
+    diference_modal.appendChild(diference_modal_content);
+    graphs_content.appendChild(diference_modal)
+
+    //create close button
+    var close = document.createElement('span');
+    close.classList.add('close_modal')
+    close.innerHTML = '+';
+    add_close_listener(close)
+    diference_modal_content.appendChild(close);
+
+    let children = div.childNodes;
+
+    children.forEach((child) => {
+      console.log(child.id);
+      console.log(child.data[0].x);
+      console.log(child.data[0].y);
+
+      console.log(calculate_density(child.data[0].x,child.data[0].y));
+
+      child.once('plotly_click',
+        function(data){
+          console.log(data.points[0].x);
+        });
+      // let
+    });
+
+
+
+  });
+}
+
+function calculate_density(x_values,y_values){
+  var densities = []
+  for (var i = 0; i < x_values.length; i++) {
+    let x = x_values[i];
+    let y = y_values[i];
+
+    let coordenate = [x,y];
+
+    if (densities.length == 0) {
+      densities.push([coordenate,1])
+    }
+    else {
+      for (var j= 0; j < density.length; j++) {
+        var founded = false;
+        if(densities[j][0] == coordenate){
+          founded = true;
+          densities[j][1] += 1
+          break;
+        }
+      }
+      if (!founded) {
+        densities.push([coordenate,1])
+      }
+    }
+  }
+  return densities
 }
 
 //Plotly bug that the graphs don't get created with the div's size unless it's told so
